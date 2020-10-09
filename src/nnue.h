@@ -29,20 +29,6 @@
 
 #define clamp(a, b, c) ((a) < (b) ? (b) : (a) > (c) ? (c) : (a))
 
-struct DirtyPiece {
-  int dirtyNum;
-  Piece pc[3];
-  Square from[3];
-  Square to[3];
-};
-
-typedef struct DirtyPiece DirtyPiece;
-
-typedef struct {
-  alignas(64) int16_t accumulation[2][256];
-  bool computedAccumulation;
-} Accumulator;
-
 void nnue_init(void);
 Value nnue_evaluate(const Position *pos);
 
