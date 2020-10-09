@@ -452,9 +452,11 @@ int evaluateBoard(Thread *thread, Board *board) {
     if (!TRACE && getCachedEvaluation(thread, board, &hashed))
         return hashed;
 
-    eval = nnue_evaluate(board);
-    storeCachedEvaluation(thread, board, board->turn == WHITE ? eval : -eval);
-    return eval;
+    if (abs(ScoreEG(board->psqtmat)) < 400) {
+        eval = nnue_evaluate(board) / 2;
+        storeCachedEvaluation(thread, board, board->turn == WHITE ? eval : -eval);
+        return eval;
+    }
 
     initEvalInfo(thread, board, &ei);
     eval = evaluatePieces(&ei, board);

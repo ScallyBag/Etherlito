@@ -17,9 +17,9 @@
 CC      = gcc
 SRC     = *.c pyrrhic/tbprobe.c
 LIBS    = -lpthread -lm
-EXE     = Ethereal
+EXE     = Etherlito
 
-WFLAGS = -std=gnu11 -Wall -Wextra -Wshadow -DNNUE_EMBEDDED -DUSE_AVX2 -DUSE_SSE41 -DUSE_SSSE3 -DUSE_SSE2 -DUSE_SSE -DUSE_MMX
+WFLAGS = -std=gnu11 -s -Wall -Wextra -Wshadow -DNNUE_EMBEDDED -DUSE_AVX2 -DUSE_SSE41 -DUSE_SSSE3 -DUSE_SSE2 -DUSE_SSE -DUSE_MMX
 CFLAGS = -O3 $(WFLAGS) -DNDEBUG -flto -march=native
 RFLAGS = -O3 $(WFLAGS) -DNDEBUG -flto -static
 TFLAGS = -O3 $(WFLAGS) -DNDEBUG -flto -march=native -fopenmp -DTUNE
