@@ -228,7 +228,8 @@ INLINE Square orient(Color c, Square s)
 
 INLINE unsigned make_index(Color c, Square s, Piece pc, Square ksq)
 {
-  return orient(c, s) + PieceToIndex[c][pc] + PS_END * ksq;
+  Piece x = (1 + pieceType(pc)) + 8 * pieceColour(pc);
+  return orient(c, s) + PieceToIndex[c][x] + PS_END * ksq;
 }
 
 static void half_kp_append_active_indices(const Position *pos, const Color c,
@@ -1238,7 +1239,7 @@ INLINE bool update_accumulator(const Position *pos)
 // Convert input features
 INLINE void transform(const Position *pos, clipped_t *output, mask_t *outMask)
 {
-  if (!update_accumulator(pos))
+  // if (!update_accumulator(pos))
     refresh_accumulator(pos);
 
   int16_t (*accumulation)[2][256] = &pos->st->accumulator.accumulation;
@@ -1662,11 +1663,13 @@ void nnue_init(void)
 
   // const char *evalFile = option_string_value(OPT_EVAL_FILE); - AGE
   const char evalFile[] = "weights.nn"; // - AGE
-  if (loadedFile && strcmp(evalFile, loadedFile) == 0)
-    return;
 
-  if (loadedFile)
-    free(loadedFile);
+  // if (loadedFile && strcmp(evalFile, loadedFile) == 0)
+  //   return;
+  //
+  // if (loadedFile)
+  //   free(loadedFile);
+  // - AGE
 
   if (load_eval_file(evalFile)) {
     loadedFile = strdup(evalFile);
