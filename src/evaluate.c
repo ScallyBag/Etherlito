@@ -453,6 +453,7 @@ int evaluateBoard(Thread *thread, Board *board) {
         return hashed;
 
     eval = nnue_evaluate(board);
+    storeCachedEvaluation(thread, board, board->turn == WHITE ? eval : -eval);
     return eval;
 
     initEvalInfo(thread, board, &ei);

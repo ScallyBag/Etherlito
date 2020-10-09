@@ -229,6 +229,7 @@ INLINE Square orient(Color c, Square s)
 INLINE unsigned make_index(Color c, Square s, Piece pc, Square ksq)
 {
   Piece x = (1 + pieceType(pc)) + 8 * pieceColour(pc);
+  if (pc == EMPTY) x = 0;
   return orient(c, s) + PieceToIndex[c][x] + PS_END * ksq;
 }
 
@@ -1239,7 +1240,7 @@ INLINE bool update_accumulator(const Position *pos)
 // Convert input features
 INLINE void transform(const Position *pos, clipped_t *output, mask_t *outMask)
 {
-  // if (!update_accumulator(pos))
+  if (!update_accumulator(pos))
     refresh_accumulator(pos);
 
   int16_t (*accumulation)[2][256] = &pos->st->accumulator.accumulation;

@@ -19,12 +19,15 @@ SRC     = *.c pyrrhic/tbprobe.c
 LIBS    = -lpthread -lm
 EXE     = Ethereal
 
-WFLAGS = -std=gnu11 -Wall -Wextra -Wshadow -DNNUE_EMBEDDED
+WFLAGS = -std=gnu11 -Wall -Wextra -Wshadow -DNNUE_EMBEDDED -DUSE_AVX2 -DUSE_SSE41 -DUSE_SSSE3 -DUSE_SSE2 -DUSE_SSE -DUSE_MMX
 CFLAGS = -O3 $(WFLAGS) -DNDEBUG -flto -march=native
 RFLAGS = -O3 $(WFLAGS) -DNDEBUG -flto -static
 TFLAGS = -O3 $(WFLAGS) -DNDEBUG -flto -march=native -fopenmp -DTUNE
 PFLAGS = -O0 $(WFLAGS) -DNDEBUG -p -pg
 DFLAGS = -O0 $(WFLAGS)
+
+
+
 
 POPCNTFLAGS = -DUSE_POPCNT -msse3 -mpopcnt
 PEXTFLAGS   = $(POPCNTFLAGS) -DUSE_PEXT -mbmi2

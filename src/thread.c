@@ -91,8 +91,6 @@ void newSearchThreadPool(Thread *threads, Board *board, Limits *limits, SearchIn
 
         memcpy(&threads[i].board, board, sizeof(Board));
         threads[i].contempt = board->turn == WHITE ? contempt : -contempt;
-
-        threads[i].board.st = &threads[i].board._stacks[16];
     }
 }
 
